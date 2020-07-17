@@ -5,7 +5,4 @@ Aim of project: Create correlations graphs between number of COVID-19 cases and 
 
 Outputs: Create two charts which show the correlations of COVID-19 cases and incidence of deforestation and fire hotspots for all countries.
 
-1) Datasets
-Deforestation: Lubis and Anuska assigned to look into datasets for deforestation for the world and upload it on Github
-Fire hotspot: Maple to look into fire hotspot dataset for the world and upload to Github
-COVID-19 cases: Estya, Yuti and Kai Wan to look into COVID-19 cases for the world and upload to Github
+1) Datasets: (a) Deforestation: Lubis and Anuska assigned to look into datasets for deforestation for the world and upload it on Github (b) Fire hotspot: Maple to look into fire hotspot dataset for the world and upload to Github (c) COVID-19 cases: Estya, Yuti and Kai Wan to look into COVID-19 cases for the world and upload to Github
