@@ -1,0 +1,47 @@
+---
+title: "CHNS Covid-19 Dataset"
+author: "Estya"
+date: "July 27, 2020"
+output:
+  html_document: default
+  word_document: default
+  pdf_document: default
+---
+## CHNS Covid-19 Dataset
+
+1) Install packages
+#relevant packages: "covid19.analytics", "tidycovid19", "nCov2019", "coronavirus", etc.
+#selected package:"covid19.analytics
+```{r}
+##install.packages("covid19.analytics")
+##install.packages("coronavirus")
+```
+2) Load library and whole dataset into R
+
+Notes: ### - means still working on this
+```{r}
+#load library from 'covid19.analytics' and 'coronavirus' package
+library(covid19.analytics)
+library(coronavirus)
+library(latexpdf)
+
+#load whole dataset into R
+covid19.data(case="ts-All")
+
+#place dataset in object 'alldata' and check 'alldata' 
+alldata<-(covid19.data(case="ts-All"))
+alldata
+write.csv(alldata,'alldata.csv')
+
+
+#list dataset by selected countries and confirmed incidences within these selected countries
+str(alldata)
+head(alldata)
+
+###working on this code right now - alldates<-alldata[which (alldata$Country.Region=='Brunei','Cambodia','China','Indonesia', 'Japan','Korea,South','Malaysia','Singapore','Taiwan','Vietnam','Laos','Burma','India', 'Philippines','Thailand'), c(2,6:194)]
+###alldates
+```
+3) Calculate daily data to monthly data (insert mathematical function that will loop)
+```{r}
+#merge daily data to monthly data (insert mathematical function (eg. sum, etc) with loop function so it repeats for specified columns)
+```
