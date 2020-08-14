@@ -43,5 +43,6 @@ head(alldata)
 ```
 3) Calculate daily data to monthly data (insert mathematical function that will loop)
 ```{r}
-#merge daily data to monthly data (insert mathematical function (eg. sum, etc) with loop function so it repeats for specified columns)
+#aggregate monthly data from dailu data (to use loop function) for selected countries
+
 ```
