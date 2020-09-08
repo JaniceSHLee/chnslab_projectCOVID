@@ -1,0 +1,50 @@
+---
+title: "analysis"
+author: "maple"
+date: "9/8/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(rnaturalearth)
+library(sf)
+
+# world data for visualization
+## also provide some other national level indicators
+## can be used for later analysis if relevant
+world <- ne_countries(scale = "medium", returnclass = "sf") 
+
+# world base map 
+world_map <- ggplot() + 
+  geom_sf(
+    data = world, fill= 'antiquewhite', 
+    color = NA, alpha = 0.5
+    ) +
+  theme(
+    panel.grid.major = element_line(color = gray(0.6),
+                                    linetype = 'dashed',
+                                    size = 0.2),
+    panel.background = element_rect(fill = 'aliceblue')
+    )
+```
+
+```{r fire data}
+df_fire <- read_csv('national_fire.csv')
+
+df_plot <- world %>% 
+  left_join(
+    df_fire %>%
+      group_by(country) %>%
+      summarize(carbon = sum(carbon)) %>%
+      rename(name = country),
+    by = 'name'
+  )
+
+world_map +
+  geom_sf(data = df_plot, aes(fill = carbon), color = NA)
+
+```
+
