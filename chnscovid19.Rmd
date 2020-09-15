@@ -22,7 +22,7 @@ library(lubridate)
 2) Load library and whole dataset into R
 
 Notes: ### - means still working on this
-```{r}
+```{r load covid data}
 #load whole dataset into R
 covid19.data(case="ts-All")
 
@@ -38,7 +38,7 @@ head(alldata)
 ###alldates
 ```
 3) Calculate daily data to monthly data (insert mathematical function that will loop)
-```{r}
+```{r aggregate covid data}
 #aggregate monthly data from dailu data (to use loop function) for selected countries
 
 df <- alldata %>%
@@ -57,11 +57,15 @@ df %>%
 ```
 
 
-```{r}
+```{r merge data}
+# change some of the country names in fire data 
+# just to match that in covid data
 df_fire <- read_csv('national_fire.csv') %>%
   mutate(country = str_replace(country, 'United States', 'US')) %>%
   mutate(country = str_replace(country, 'Korea', 'Korea, South')) 
 
+# merge the two data files
+# some countries are missing in fire data coz it's 0
 df %>% 
   left_join(df_fire, by = c('country', 'month'))
 
