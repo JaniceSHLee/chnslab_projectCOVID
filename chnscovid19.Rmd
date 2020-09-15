@@ -12,26 +12,22 @@ output:
 1) Install packages
 #relevant packages: "covid19.analytics", "tidycovid19", "nCov2019", "coronavirus", etc.
 #selected package:"covid19.analytics
-```{r}
-##install.packages("covid19.analytics")
-##install.packages("coronavirus")
+```{r set up}
+#load library from 'covid19.analytics' and 'coronavirus' package
+library(covid19.analytics)
+library(coronavirus)
+library(tidyverse)
+library(lubridate)
 ```
 2) Load library and whole dataset into R
 
 Notes: ### - means still working on this
 ```{r}
-#load library from 'covid19.analytics' and 'coronavirus' package
-library(covid19.analytics)
-library(coronavirus)
-library(latexpdf)
-
 #load whole dataset into R
 covid19.data(case="ts-All")
 
 #place dataset in object 'alldata' and check 'alldata' 
 alldata<-(covid19.data(case="ts-All"))
-alldata
-write.csv(alldata,'alldata.csv')
 
 
 #list dataset by selected countries and confirmed incidences within these selected countries
@@ -45,4 +41,17 @@ head(alldata)
 ```{r}
 #aggregate monthly data from dailu data (to use loop function) for selected countries
 
+df <- alldata %>%
+  pivot_longer(names(.)[5: (ncol(.) - 1)], 
+               names_to = 'date', values_to = 'cases') %>%
+  select(-Long, -Lat, -Province.State) %>%
+  mutate(date = ymd(date)) %>%
+  mutate(month = month(date)) %>%
+  group_by(Country.Region, month) %>%
+  summarize(cases = max(cases)) %>%
+  filter(between(month, 1, 8)) %>%
+  rename(country = Country.Region)
+
+df %>%
+  write_csv('covid_cases.csv')
 ```
