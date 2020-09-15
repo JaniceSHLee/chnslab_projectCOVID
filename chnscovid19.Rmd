@@ -55,3 +55,15 @@ df <- alldata %>%
 df %>%
   write_csv('covid_cases.csv')
 ```
+
+
+```{r}
+df_fire <- read_csv('national_fire.csv') %>%
+  mutate(country = str_replace(country, 'United States', 'US')) %>%
+  mutate(country = str_replace(country, 'Korea', 'Korea, South')) 
+
+df %>% 
+  left_join(df_fire, by = c('country', 'month'))
+
+```
+
