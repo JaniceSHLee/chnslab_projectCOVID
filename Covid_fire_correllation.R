@@ -12,7 +12,7 @@ fire %>%  head(5)
 
 # Combine covid and fire
 covid_fire <- left_join(covid, fire, by = c("country", "month")) %>% 
-  # Change the unit
+  # Scale both units
   dplyr::mutate(cases_sc = scale(cases), 
                 carbon_sc = scale(carbon))
 covid_fire %>% head()
