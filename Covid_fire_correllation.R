@@ -1,4 +1,4 @@
-# Read files
+# Load libraries
 library(here)
 library(tidyverse)
 
@@ -10,7 +10,7 @@ covid %>% head(5)
 fire <- read.csv(here::here("national_fire.csv"))
 fire %>%  head(5)
 
-# Combine covid and fire and conduct simple correlation analysis
+# Combine covid and fire
 covid_fire <- left_join(covid, fire, by = c("country", "month")) %>% 
   # Change the unit
   dplyr::mutate(cases_sc = scale(cases), 
@@ -22,6 +22,7 @@ ggplot(data=covid_fire, aes(x=cases_sc, y=carbon_sc))+
   geom_point()+
   facet_wrap(~month)
 
+# Conduct and plot correlation between # cases and # carbon
 plot(covid_fire$cases_sc, covid_fire$carbon_sc, xlab="# cases", ylab="# fire",
      main="Correllation between 
      number of COVID-19 cases and 
